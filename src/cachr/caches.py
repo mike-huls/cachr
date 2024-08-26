@@ -1,14 +1,14 @@
 from collections import OrderedDict
 from typing import Any, Optional, Callable
 
-from src.cachr import policies
+from . import policies
 
 
-class BaseCache:
+class Cache:
     cache: OrderedDict
     capacity: int
 
-    def __init__(self, capacity: int, cache_strategy: policies.ICacheStrategy = policies.SimpleCache()):
+    def __init__(self, capacity: int, cache_strategy: policies.ICacheStrategy = policies.DefaultEvictionPolicy()):
         self.cache: OrderedDict[Any, Any] = OrderedDict()
         self.capacity: int = capacity
         self._cache_strategy = cache_strategy
@@ -36,7 +36,6 @@ class BaseCache:
     def size(self) -> int:
         """ Return the number of items in the cache """
         return len(self.cache)
-
     # endregion
 
     # region DECORATOR
@@ -58,29 +57,26 @@ class BaseCache:
     # endregion
 
 
-class Cache(BaseCache):
-    def __init__(self, capacity: int):
-        super().__init__(capacity=capacity, cache_strategy=policies.SimpleCache())
 
 
-class LRUCache(BaseCache):
+class LRUCache(Cache):
     def __init__(self, capacity: int):
         super().__init__(capacity=capacity, cache_strategy=policies.LRUEvictionPolicy())
 
 
-class TTLCache(BaseCache):
+class TTLCache(Cache):
     def __init__(self, capacity: int, ttl_seconds:float):
         super().__init__(capacity=capacity, cache_strategy=policies.TTLEvictionPolicy(ttl_seconds=ttl_seconds))
 
 
-class SlidingWindowCache(BaseCache):
+class SlidingWindowCache(Cache):
     def __init__(self, capacity: int, expiration_seconds:float):
         super().__init__(capacity=capacity, cache_strategy=policies.SlidingWindowEvictionPolicy(expiration_seconds=expiration_seconds))
 
-class LFUCache(BaseCache):
+class LFUCache(Cache):
     def __init__(self, capacity: int, ):
         super().__init__(capacity=capacity, cache_strategy=policies.LFUEvictionPolicy())
 
-class RandomReplaceCache(BaseCache):
+class RandomReplaceCache(Cache):
     def __init__(self, capacity: int, ):
         super().__init__(capacity=capacity, cache_strategy=policies.RandomEvictionPolicy())

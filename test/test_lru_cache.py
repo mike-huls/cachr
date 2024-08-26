@@ -1,6 +1,7 @@
 import unittest
 
-from src.cachr.caches import LRUCache
+from src.cachr import policies
+from src.cachr.caches import LRUCache, Cache
 
 
 class TestLRUCache(unittest.TestCase):
@@ -10,6 +11,24 @@ class TestLRUCache(unittest.TestCase):
         cache.put(key=1, value="one")
         cache.put(key=2, value="two")
         self.assertEqual(cache.get(key=1), "one", msg="Failed to retrieve an existing key with value 'one'")
+
+        cache_2 = Cache(capacity=2, cache_strategy=policies.LRUEvictionPolicy())
+        cache_2.put(key=1, value="one")
+        cache_2.put(key=2, value="two")
+        self.assertEqual(cache_2.cache.get(1), "one", msg="Failed to retrieve an existing key with value 'one'")
+        cache_2.get(key=1)
+        cache_2.put(key=3, value="three")
+        print(cache_2.cache)
+        self.assertIsNone(cache_2.cache.get(2), msg="Should have removed item with value 'two' since this was the oldest")
+
+        cache = Cache(capacity=2, cache_strategy=policies.LRUEvictionPolicy())
+        cache.put(key=1, value="one")
+        cache.put(key=2, value="two")
+        print(cache.get(key=1))  # prints "one"
+        cache.put(key=3, value="three")
+        print(cache.get(key=1))  # prints "one"
+        print(cache.get(key=2))  # prints "one"
+        print(cache.get(key=3))  # prints "one"
 
     def test_get_non_existing_key(self):
         cache = LRUCache(capacity=2)
@@ -66,6 +85,7 @@ class TestLRUCache(unittest.TestCase):
     def test_decorator_caching(self):
         @LRUCache(capacity=2)
         def add(x, y):
+            print(f"calculating {x} + {y}..")
             return x + y
 
         # First call, result should be computed and cached

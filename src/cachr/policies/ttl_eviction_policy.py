@@ -14,7 +14,7 @@ class TTLEvictionPolicy(ICacheStrategy):
         """Check if the item is expired based on its timestamp."""
         return (time.time() - self.timestamps[key]) > self.ttl
 
-    def on_access(self, cache: "BaseCache", key: Any) -> None:
+    def on_access(self, cache: "Cache", key: Any) -> None:
         """Remove the item if it's expired, otherwise update its access time."""
         if self._is_expired(key):
             cache.cache.pop(key, None)
@@ -23,14 +23,14 @@ class TTLEvictionPolicy(ICacheStrategy):
         cache.cache.move_to_end(key=key)
 
 
-    def on_insert(self, cache: "BaseCache", key: Any) -> None:
+    def on_insert(self, cache: "Cache", key: Any) -> None:
         """Insert an item into the cache, evicting if necessary."""
         if len(cache.cache) >= cache.capacity:
             self.evict(cache=cache)
             # cache.cache.popitem(last=False)
         self.timestamps[key] = time.time()
 
-    def evict(self, cache: "BaseCache") -> None:
+    def evict(self, cache: "Cache") -> None:
         """Evict items based on expiration and capacity."""
 
         # First remove all expired keys

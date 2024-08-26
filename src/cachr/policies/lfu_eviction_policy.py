@@ -15,12 +15,12 @@ class LFUEvictionPolicy(ICacheStrategy):
     #     """Check if the item is expired based on its timestamp."""
     #     return (time.time() - self.key_access_count_dict[key]) > self.ttl
 
-    def on_access(self, cache: "BaseCache", key: Any) -> None:
+    def on_access(self, cache: "Cache", key: Any) -> None:
         """ Move key to the end and update frequency dict if item is accessed """
         self.frequency_dict[key] += 1
         cache.cache.move_to_end(key=key)
 
-    def on_insert(self, cache: "BaseCache", key: Any) -> None:
+    def on_insert(self, cache: "Cache", key: Any) -> None:
         """Insert an item into the cache, evicting if necessary."""
         if len(cache.cache) >= cache.capacity:
             self.evict(cache=cache)
@@ -28,7 +28,7 @@ class LFUEvictionPolicy(ICacheStrategy):
         self.timestamps[key] = time.time()
         self.frequency_dict[key] = 0
 
-    def evict(self, cache: "BaseCache") -> None:
+    def evict(self, cache: "Cache") -> None:
         """Evict items based on expiration and capacity."""
 
         # Initialize variables to track the least frequent and oldest key

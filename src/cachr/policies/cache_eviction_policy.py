@@ -3,17 +3,17 @@ from typing import Any
 from .i_eviction_policy import ICacheStrategy
 
 
-class SimpleCache(ICacheStrategy):
-    def on_access(self, cache: "BaseCache", key: Any) -> None:
-        """Method called when a key is accessed in the cache."""
+class DefaultEvictionPolicy(ICacheStrategy):
+    def on_access(self, cache: "Cache", key: Any) -> None:
+        """ Method that is called before a key is accessed in the cache."""
         # Does nothing; key order is maintained
         pass
 
-    def on_insert(self, cache: "BaseCache", key: Any) -> None:
-        """ Method called when a new key-value pair is inserted into the cache."""
+    def on_insert(self, cache: "Cache", key: Any) -> None:
+        """Method that is called before a new key-value pair is inserted into the cache."""
         if len(cache.cache) >= cache.capacity:
             self.evict(cache=cache)
 
-    def evict(self, cache: "BaseCache") -> None:
-        """ Method to evict an item based on the eviction policy."""
+    def evict(self, cache: "Cache") -> None:
+        """ Remove the oldes ."""
         cache.cache.popitem(last=False)

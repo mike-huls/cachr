@@ -1,1 +1,1 @@
-from .caches import BaseCache, Cache, LRUCache, TTLCache, SlidingWindowCache
+from .caches import Cache, Cache, LRUCache, TTLCache, SlidingWindowCache
