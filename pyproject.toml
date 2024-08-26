@@ -20,10 +20,10 @@ dynamic = ["version"]
 dependencies = []
 
 [project.urls]
-"Homepage" = "https://github.com/mike-huls/bloomlib"
-"Bug Tracker" = "https://github.com/mike-huls/bloomlib/issues"
-"Documentation" = "https://github.com/mike-huls/bloomlib/blob/master/README.md/"
-"Source" = "https://github.com/mike-huls/bloomlib/"
+"Homepage" = "https://github.com/mike-huls/cachr"
+"Bug Tracker" = "https://github.com/mike-huls/cachr/issues"
+"Documentation" = "https://github.com/mike-huls/cachr/blob/master/README.md/"
+"Source" = "https://github.com/mike-huls/cachr/"
 "Say Thanks!" = "https://www.buymeacoffee.com/mikehuls"
 
 [build-system]
