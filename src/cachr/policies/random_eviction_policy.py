@@ -1,10 +1,10 @@
 import random
 from typing import Any
 
-from .i_eviction_policy import ICacheStrategy
+from .i_eviction_policy import CacheStrategy
 
 
-class RandomEvictionPolicy(ICacheStrategy):
+class RandomEvictionPolicy(CacheStrategy):
     def on_access(self, cache: "Cache", key: Any) -> Any:
         """ Do Nothing """
         pass

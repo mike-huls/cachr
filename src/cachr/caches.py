@@ -8,7 +8,7 @@ class Cache:
     cache: OrderedDict
     capacity: int
 
-    def __init__(self, capacity: int, cache_strategy: policies.ICacheStrategy = policies.DefaultEvictionPolicy()):
+    def __init__(self, capacity: int, cache_strategy: policies.CacheStrategy = policies.DefaultEvictionPolicy()):
         self.cache: OrderedDict[Any, Any] = OrderedDict()
         self.capacity: int = capacity
         self._cache_strategy = cache_strategy

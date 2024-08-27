@@ -3,10 +3,10 @@ from collections import OrderedDict
 from typing import Any, Dict, DefaultDict, List
 from _collections import defaultdict
 
-from .i_eviction_policy import ICacheStrategy
+from .i_eviction_policy import CacheStrategy
 
 
-class LFUEvictionPolicy(ICacheStrategy):
+class LFUEvictionPolicy(CacheStrategy):
     def __init__(self):
         self.frequency_dict: DefaultDict[Any, float] = defaultdict(int)
         self.timestamps: OrderedDict[Any, float] = OrderedDict()

@@ -2,10 +2,10 @@ import time
 from collections import OrderedDict
 from typing import Any
 
-from .i_eviction_policy import ICacheStrategy
+from .i_eviction_policy import CacheStrategy
 
 
-class TTLEvictionPolicy(ICacheStrategy):
+class TTLEvictionPolicy(CacheStrategy):
     def __init__(self, ttl_seconds: float):
         self.ttl = ttl_seconds  # Time-to-live in seconds
         self.timestamps: OrderedDict[Any, float] = OrderedDict()

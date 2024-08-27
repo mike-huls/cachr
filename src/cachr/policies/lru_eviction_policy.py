@@ -1,9 +1,9 @@
 from typing import Any
 
-from .i_eviction_policy import ICacheStrategy
+from .i_eviction_policy import CacheStrategy
 
 
-class LRUEvictionPolicy(ICacheStrategy):
+class LRUEvictionPolicy(CacheStrategy):
     def on_access(self, cache: "Cache", key: Any) -> Any:
         """Move the accessed item to the end to mark it as most recently used."""
         cache.cache.move_to_end(key=key)

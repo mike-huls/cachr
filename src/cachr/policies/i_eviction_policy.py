@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Any
 
 
-class ICacheStrategy(ABC):
+class CacheStrategy(ABC):
     @abstractmethod
     def on_access(self, cache: "Cache", key: Any) -> None:
         """ Method that is called before a key is accessed in the cache."""

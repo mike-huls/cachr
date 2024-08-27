@@ -1,4 +1,4 @@
-from .i_eviction_policy import ICacheStrategy
+from .i_eviction_policy import CacheStrategy
 from .cache_eviction_policy import DefaultEvictionPolicy
 from .lru_eviction_policy import LRUEvictionPolicy
 from .ttl_eviction_policy import TTLEvictionPolicy
