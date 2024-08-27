@@ -17,6 +17,8 @@ All notable changes to this project will be documented in this file.
 ## 2024-08-26 - v0.0.2
 ### Added
 - Extended README
+### Changed
+- Renamed `ICacheStrategy` to `CacheStrategy` 
 ### Fixed
 - Rename base cache from `CacheBlueprint` to `Cache` with `DefaultEvictionPolicy`
 - Fixed import error
