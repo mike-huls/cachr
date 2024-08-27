@@ -3,7 +3,7 @@ from collections import OrderedDict
 from typing import Any, Dict, DefaultDict, List
 from _collections import defaultdict
 
-from .i_eviction_policy import CacheStrategy
+from .cache_strategy import CacheStrategy
 
 
 class LFUEvictionPolicy(CacheStrategy):

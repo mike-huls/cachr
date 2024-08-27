@@ -13,6 +13,12 @@ All notable changes to this project will be documented in this file.
 - <br>
 <hr>
 
+## 2024-08-27 - v0.0.3
+### Changed
+- Renamed `i_cache_strategy.py` to `cach_strategy.py` 
+- Added CacheStrategy to cachr.__init__ so we can `from cachr import CacheStrategy` 
+<hr>
+
 
 ## 2024-08-26 - v0.0.2
 ### Added
@@ -21,7 +27,6 @@ All notable changes to this project will be documented in this file.
 - Renamed `ICacheStrategy` to `CacheStrategy` 
 ### Fixed
 - Rename base cache from `CacheBlueprint` to `Cache` with `DefaultEvictionPolicy`
-- Fixed import error
 <hr>
 
 ## 2024-08-26 - v0.0.1

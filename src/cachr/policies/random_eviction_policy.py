@@ -1,7 +1,7 @@
 import random
 from typing import Any
 
-from .i_eviction_policy import CacheStrategy
+from .cache_strategy import CacheStrategy
 
 
 class RandomEvictionPolicy(CacheStrategy):
