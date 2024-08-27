@@ -33,6 +33,7 @@ class Cache:
     def clear(self):
         self.cache.clear()
 
+    @property
     def size(self) -> int:
         """ Return the number of items in the cache """
         return len(self.cache)

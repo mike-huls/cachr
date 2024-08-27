@@ -13,6 +13,11 @@ All notable changes to this project will be documented in this file.
 - <br>
 <hr>
 
+## 2024-08-27 - v0.0.4
+### Changed
+- `size` method is now a property 
+<hr>
+
 ## 2024-08-27 - v0.0.3
 ### Changed
 - Renamed `i_cache_strategy.py` to `cach_strategy.py` 
