@@ -60,5 +60,27 @@ class TestExpiringLRUCache(unittest.TestCase):
         self.assertEqual(cache.get("d"), 4, msg="Failed to retrieve value '4' for key 'd'")
         time.sleep(0.4)
 
+    def test_decorator_caching(self):
+        @TTLCache(ttl_seconds=0.1, capacity=2)
+        def add(x, y):
+            return x + y
+
+        # First call, result should be computed and cached
+        self.assertEqual(first=add(1, 2), second=3, msg="Failed to cache result of add(1, 2)")
+        # Second call with same arguments, result should be retrieved from cache
+        self.assertEqual(first=add(1, 2), second=3, msg="Failed to retrieve cached result of add(1, 2)")
+        # New call with different arguments, new result should be computed and cached
+        self.assertEqual(first=add(2, 3), second=5, msg="Failed to cache result of add(2, 3)")
+        # First cached result should still be valid
+        self.assertEqual(first=add(1, 2), second=3, msg="Failed to retrieve still-valid cached result of add(1, 2)")
+        # This new call should evict the oldest cache entry (for add(1, 2))
+        self.assertEqual(first=add(3, 4), second=7, msg="Failed to cache result of add(3, 4)")
+        # Original add(1, 2) should now be evicted
+        self.assertEqual(first=add(1, 2), second=3, msg="Failed to recompute result of add(1, 2) after eviction")
+        time.sleep(0.3)
+        add.refresh()
+        self.assertEqual(first=0, second=add.cache_info().get('currsize'), msg="All items in cache should have expired by now")
+
+
 if __name__ == '__main__':
     unittest.main()

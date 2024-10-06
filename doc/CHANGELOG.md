@@ -13,6 +13,14 @@ All notable changes to this project will be documented in this file.
 - <br>
 <hr>
 
+## 2024-10-06 - v0.0.5
+### Added
+- `cache_info` method; accessible on cache object. Also on decorator 
+- `refresh` method; accessible on cache object. Also on decorator 
+- `clear` method; accessible on cache object. Also on decorator
+- Unit tests for TTL cache decorator
+<hr>
+
 ## 2024-08-27 - v0.0.4
 ### Changed
 - `size` method is now a property 

@@ -4,6 +4,7 @@ adjust version in pyproject.toml
 build project
 `poetry build`
 
+### TestPyPI
 Set testpypi repository  
 `poetry config repositories.testpypi https://test.pypi.org/legacy/`  
 
@@ -15,6 +16,9 @@ publish to testpypi
 
 install and check  
 `pip install --index-url https://test.pypi.org/simple/ cachr`  
+
+
+### PyPI
 
 Set pypi repository  
 `poetry config pypi-token.pypi <YOUR TOKEN>`  

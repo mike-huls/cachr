@@ -7,7 +7,6 @@ from .cache_strategy import CacheStrategy
 class RandomEvictionPolicy(CacheStrategy):
     def on_access(self, cache: "Cache", key: Any) -> Any:
         """ Do Nothing """
-        pass
 
     def on_insert(self, cache: "Cache", key: Any) -> None:
         """ Before item is inserted; check if we need to evict one """
