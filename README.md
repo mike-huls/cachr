@@ -23,13 +23,13 @@ pip install cachr
 
 ## Table of Contents
 - [Main Features](#main-features)
-- [Usage Example](#usage-example)
-- [Installation](#installation)
-- [Dependencies](#dependencies)
+- [Usage Example](#Usage-example)
+- [Installation](#Installation)
+- [Dependencies](#Dependencies)
 - [License](#license)
 - [Documentation](#documentation)
 - [Development](#development)
-- [Contributing to bloomlib](#contributing-to-bloomlib)
+- [Contributing to Cachr](#Development)
 
 ## Main Features
 - 🐍 Pure Python
@@ -68,7 +68,7 @@ Binary installers for the latest released version are available at the [Python
 Package Index (PyPI)](https://pypi.org/project/cachr).
 
 ## Dependencies
-Bloomlib has no Python dependencies
+Cachr has no Python dependencies
 
 ## License
 [MIT](LICENSE.txt)

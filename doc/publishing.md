@@ -1,6 +1,4 @@
-adjust version in cachr.__init__.py
-adjust version in pyproject.toml
-
+sh 
 build project
 `poetry build`
 
