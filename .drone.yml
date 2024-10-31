@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: DataFactory Backend
+name: Publish Cachr
 
 
 steps:
@@ -28,7 +28,7 @@ steps:
           - refs/tags/acceptation-*
           - refs/tags/production-*
 
-  - name: build_and_publish_package
+  - name: build_and_publish_package_pypi
     image: python:3.12-slim-bookworm
     pull: always
     environment:
@@ -46,13 +46,11 @@ steps:
     when:
       ref:
         include:
-          #- refs/tags/test-*
-          #- refs/tags/acceptation-*
           - refs/tags/production-*
     depends_on:
       - unittests
 
-  - name: build_and_publish_package
+  - name: build_and_publish_package_testpypi
     image: python:3.12-slim-bookworm
     pull: always
     environment:
@@ -71,8 +69,6 @@ steps:
       ref:
         include:
           - refs/tags/test-*
-          #- refs/tags/acceptation-*
-#          - refs/tags/production-*
     depends_on:
       - unittests
 
@@ -104,4 +100,32 @@ steps:
 #          - refs/tags/acceptation-*
           - refs/tags/production-*
     depends_on:
-      - build_and_publish_package
+      - build_and_publish_package_pypi
+
+  - name: slack_message_test
+    image: plugins/slack
+    pull: if-not-exists
+    settings:
+      webhook:
+        from_secret: SLACK_WEBHOOK_URL
+      template: >
+        {{#success build.status}}
+          ✅ Successfully published *{{repo.name}}* to test.PyPI!
+          🏷️ {{build.tag}}
+          🔨 <{{build.link}}| Build #{{build.number}}>
+          🔗 <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|Commit: {{ truncate build.commit 8 }}>
+          👤 {{build.author.name}}
+        {{else}}
+          ❌ Error publishing *{{repo.name}}* to test.PyPI
+          🏷️ {{build.tag}}
+          🔨 <{{build.link}}| Build #{{build.number}}>
+          🔗 <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|Commit: {{ truncate build.commit 8 }}>
+          👤 {{build.author.name}}
+        {{/success}}
+    when:
+      status: [ success, failure ]
+      ref:
+        include:
+          - refs/tags/test-*
+    depends_on:
+      - build_and_publish_package_testpypi

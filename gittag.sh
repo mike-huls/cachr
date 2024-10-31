@@ -17,7 +17,8 @@ for arg in "$@"; do
   if [ "$arg" == "production" ] || [ "$arg" == "prod" ] || [ "$arg" == "release" ]; then
     environment='production'
   elif [ "$arg" == "acceptation" ] || [ "$arg" == "acc" ]; then
-    environment='acceptation';
+    echo "Error: Invalid argument '$arg'. Accepted values are 'production', or 'test'."
+    exit 1
   elif [ "$arg" == "test" ]; then
     environment='test';
   else
