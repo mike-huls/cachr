@@ -19,7 +19,6 @@ include = [
 [tool.poetry.dependencies]
 python = "^3.9"
 
-
 [project.urls]
 "Homepage" = "https://github.com/mike-huls/cachr"
 "Bug Tracker" = "https://github.com/mike-huls/cachr/issues"
