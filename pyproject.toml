@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cachr"
-version = "0.0.5"
+version = "0.0.6"
 description = "Library that allows you to compose your own cache, pre-packaged with many useful caches"
 authors = ["Mike Huls <mikehuls42@gmail.com>"]
 license = "MIT"

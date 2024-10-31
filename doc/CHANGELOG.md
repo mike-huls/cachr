@@ -13,6 +13,15 @@ All notable changes to this project will be documented in this file.
 - <br>
 <hr>
 
+## 2024-10-31 - v0.0.6
+### Added
+- dronefile for CI/CD
+### Changed
+- Readme; added examples etc
+### Removed
+- requirements.txt - cleanup
+
+
 ## 2024-10-06 - v0.0.5
 ### Added
 - `cache_info` method; accessible on cache object. Also on decorator 
