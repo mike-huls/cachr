@@ -37,7 +37,15 @@ pip install cachr
 - 👨‍🎨 User-friendly
 
 ## Usage Example
+At the moment there are five caches available for use: 
+- LFUCache: Removes the least frequently used item in the cache when it overflows
+- LRUCache: A Least Recently Used Cache removes the least recently used item when it overflows
+- RandomReplaceCache: randomly expells an item from the cache when it overflows
+- TTLCache: A Time-To-Live-cache acts like a LRUCache and also removes an entry from the cache after a certain expiration time
+- SlidingWindowCache: Like a TTLCache but it renews the expiration date eacht time an item is requested from the cache.
 
+All caches are added to your code in two ways: by `decorator` or as a regular object.
+Decorator:
 ```python
 import time
 from cachr import LRUCache
@@ -55,6 +63,25 @@ print(add(1, 2))    # <-- takes a second to calculate
 print(add(1, 2))    # <-- takes value from cache immediately 
 print(add(1, 2))    # <-- takes value from cache immediately 
 ```
+
+Object:
+```python
+from cachr import TTLCache
+
+my_cache =  TTLCache(capacity=25, ttl_seconds=60)
+
+def very_expensive_function(number:int) -> int:
+    return number * number
+
+for i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 3, 5, 7, 9, 1, 1, 1, 1]:
+    value_from_cache = my_cache.get(i)
+    if value_from_cache is not None:
+        print(f"Answer for {i} is {value_from_cache}")
+        continue
+    print(f"calculating expensive function for {i}..")
+    my_cache.put(key=i, value=very_expensive_function(number=i))
+```
+
 
 
 ## Installation
