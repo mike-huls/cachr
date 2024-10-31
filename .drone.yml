@@ -7,14 +7,20 @@ steps:
   - name: unittests
     image: python:3.12-slim-bookworm
     pull: always
+    environment:
+      CODECOV_TOKEN:
+        from_secret: CODECOV_TOKEN
     commands:
       - apt-get update
       - apt-get install -y --no-install-recommends libpq-dev gcc python3-dev build-essential
       - python -m pip install --upgrade pip
-      - python -m pip install poetry
+      - python -m pip install poetry coverage codecov
       - python -m poetry install
-      - python -m unittest discover -s test/ -p "test_*.py"
+      #- python -m unittest discover -s test/ -p "test_*.py"
       #- py.test --cov-report html --cov=src -v
+      - python -m coverage run -m unittest discover -s test/ -p "test_*.py"
+      - python -m coverage xml
+      - codecov -t "$CODECOV_TOKEN"
     when:
       ref:
         include:
@@ -71,7 +77,7 @@ steps:
       status: [ success, failure ]
       ref:
         include:
-          - refs/tags/acceptation-*
+#          - refs/tags/acceptation-*
           - refs/tags/production-*
     depends_on:
       - build_and_publish_package
