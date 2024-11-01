@@ -63,6 +63,7 @@ steps:
       - python -m pip install poetry
       - python -m poetry install
       - python -m poetry build
+      - env
       - python -m poetry config pypi-token.pypi "$PUBLIC_TEST_PYPI_TOKEN"
       - python -m poetry publish
     when:
