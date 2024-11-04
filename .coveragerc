@@ -1,6 +1,5 @@
 [run]
 omit =
-    path/to/i_*.py
     test/*
 
 [report]
