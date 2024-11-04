@@ -27,7 +27,7 @@ jobs:
 
     - name: Run unit test
       run: |
-        uv run coverage run --omit="test/*" -m unittest
+        uv run coverage run --omit="test/*" -m pytest
 
     - name: Create coverage
       run: |
