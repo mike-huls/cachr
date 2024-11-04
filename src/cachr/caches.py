@@ -32,7 +32,7 @@ class _CacheInfo:
 class Cache:
     cache: OrderedDict
     capacity: int
-    _cach_info: _CacheInfo
+    _cache_info: _CacheInfo
     _cache_strategy: policies.CacheStrategy
 
     def __init__(
