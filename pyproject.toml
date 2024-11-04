@@ -1,6 +1,6 @@
 [project]
 name = "cachr"
-version = "0.0.8"
+version = "0.0.9"
 description = "Library that allows you to compose your own cache, pre-packaged with many useful caches"
 authors = ["Mike Huls <mikehuls42@gmail.com>"]
 license = "MIT"
