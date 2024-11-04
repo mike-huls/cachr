@@ -14,7 +14,7 @@
 ![PyPI Downloads](https://img.shields.io/pypi/dm/cachr.svg?label=PyPI%20downloads)
 ![versions](https://img.shields.io/pypi/pyversions/cachr.svg?color=%2334D058)
 <br>
-![tweet](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fmike-huls%2Fcythonbuilder) ![xfollow](https://img.shields.io/twitter/follow/mike_huls?style=social)
+![tweet](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fmike-huls%2Fcachr) ![xfollow](https://img.shields.io/twitter/follow/mike_huls?style=social)
 # cachr: superfast, composable caching for Python
 
 [//]: # (|         |                                                                                                                                                                                                                                                                                                                                                               |)
