@@ -22,7 +22,6 @@ class TTLEvictionPolicy(CacheStrategy):
             return None
         cache.cache.move_to_end(key=key)
 
-
     def on_insert(self, cache: "Cache", key: Any) -> None:
         """Insert an item into the cache, evicting if necessary."""
         if len(cache.cache) >= cache.capacity:

@@ -12,7 +12,7 @@ class _CacheInfo:
     hits: int = 0
     misses: int = 0
 
-    def __init__(self, maxsize:int):
+    def __init__(self, maxsize: int):
         self.maxsize = maxsize
 
     def reset(self):
@@ -25,8 +25,9 @@ class _CacheInfo:
             "hits": self.hits,
             "misses": self.misses,
             "maxsize": self.maxsize,
-            "currsize": cur_size
+            "currsize": cur_size,
         }
+
 
 class Cache:
     cache: OrderedDict
@@ -34,8 +35,11 @@ class Cache:
     _cach_info: _CacheInfo
     _cache_strategy: policies.CacheStrategy
 
-
-    def __init__(self, capacity: int, cache_strategy: policies.CacheStrategy = policies.DefaultEvictionPolicy()):
+    def __init__(
+        self,
+        capacity: int,
+        cache_strategy: policies.CacheStrategy = policies.DefaultEvictionPolicy(),
+    ):
         self.cache: OrderedDict[Any, Any] = OrderedDict()
         self.capacity: int = capacity
         self._cache_strategy = cache_strategy
@@ -69,15 +73,16 @@ class Cache:
 
     @property
     def size(self) -> int:
-        """ Return the number of items in the cache """
+        """Return the number of items in the cache"""
         return len(self.cache)
+
     # endregion
 
     def __get_cache_info(self):
         return self._cache_info.as_dict(cur_size=self.size)
 
     def __refresh_cache(self):
-        """ Calls the evict method to refresh the cache; rid it of all expired or exess keys"""
+        """Calls the evict method to refresh the cache; rid it of all expired or exess keys"""
         self._cache_strategy.evict(cache=self)
 
     # region DECORATOR
@@ -95,16 +100,14 @@ class Cache:
                 self.put(key=key, value=result)
             return result
 
-
         # Add convenience methods on the cache
         wrapper.cache_info = self.__get_cache_info
         wrapper.clear = self.clear
         wrapper.refresh = self.__refresh_cache
 
         return wrapper
+
     # endregion
-
-
 
 
 class LRUCache(Cache):
@@ -113,18 +116,36 @@ class LRUCache(Cache):
 
 
 class TTLCache(Cache):
-    def __init__(self, capacity: int, ttl_seconds:float):
-        super().__init__(capacity=capacity, cache_strategy=policies.TTLEvictionPolicy(ttl_seconds=ttl_seconds))
+    def __init__(self, capacity: int, ttl_seconds: float):
+        super().__init__(
+            capacity=capacity,
+            cache_strategy=policies.TTLEvictionPolicy(ttl_seconds=ttl_seconds),
+        )
 
 
 class SlidingWindowCache(Cache):
-    def __init__(self, capacity: int, expiration_seconds:float):
-        super().__init__(capacity=capacity, cache_strategy=policies.SlidingWindowEvictionPolicy(expiration_seconds=expiration_seconds))
+    def __init__(self, capacity: int, expiration_seconds: float):
+        super().__init__(
+            capacity=capacity,
+            cache_strategy=policies.SlidingWindowEvictionPolicy(
+                expiration_seconds=expiration_seconds
+            ),
+        )
+
 
 class LFUCache(Cache):
-    def __init__(self, capacity: int, ):
+    def __init__(
+        self,
+        capacity: int,
+    ):
         super().__init__(capacity=capacity, cache_strategy=policies.LFUEvictionPolicy())
 
+
 class RandomReplaceCache(Cache):
-    def __init__(self, capacity: int, ):
-        super().__init__(capacity=capacity, cache_strategy=policies.RandomEvictionPolicy())
+    def __init__(
+        self,
+        capacity: int,
+    ):
+        super().__init__(
+            capacity=capacity, cache_strategy=policies.RandomEvictionPolicy()
+        )

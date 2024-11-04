@@ -1,4 +1,4 @@
- ```commandline
+ ```text
  ██████╗ █████╗  ██████╗██╗  ██╗██████╗   
 ██╔════╝██╔══██╗██╔════╝██║  ██║██╔══██╗  
 ██║     ███████║██║     ███████║██████╔╝  
@@ -7,13 +7,25 @@
  ╚═════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝  
 ```
 
+![coverage](https://img.shields.io/codecov/c/github/mike-huls/cachr)
+![Tests](https://github.com/mike-huls/cachr/actions/workflows/tests.yml/badge.svg)
+![version](https://img.shields.io/pypi/v/cachr?color=%2334D058&label=pypi%20package)
+![dependencies](https://img.shields.io/librariesio/release/pypi/cachr)
+![PyPI Downloads](https://img.shields.io/pypi/dm/cachr.svg?label=PyPI%20downloads)
+![versions](https://img.shields.io/pypi/pyversions/cachr.svg?color=%2334D058)
 # cachr: superfast, composable caching for Python
-|         |                                                                                                                                                                                                                                                                                                                                                               |
-|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Testing | ![coverage](https://img.shields.io/codecov/c/github/mike-huls/cachr)                                                                                                                                                                                                                                                                                          |
-| Package | [![PyPI Latest Release](https://img.shields.io/pypi/v/cachr.svg)](https://pypi.org/project/cachr/) [![PyPI Downloads](https://img.shields.io/pypi/dm/cachr.svg?label=PyPI%20downloads)](https://pypistats.org/packages/cachr) <br/>![status](https://img.shields.io/pypi/status/cachr) ![dependencies](https://img.shields.io/librariesio/release/pypi/cachr) |
-| Meta    | ![GitHub License](https://img.shields.io/github/license/mike-huls/cachr) ![implementation](https://img.shields.io/pypi/implementation/cachr)  ![versions](https://img.shields.io/pypi/pyversions/cachr)                                                                                                                                                       |
-| Social  | ![tweet](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fmike-huls%2Fcachr) ![xfollow](https://img.shields.io/twitter/follow/mike_huls?style=social)                                                                                                                                                                           | 
+
+[//]: # (|         |                                                                                                                                                                                                                                                                                                                                                               |)
+
+[//]: # (|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|)
+
+[//]: # (| Testing | ![coverage]&#40;https://img.shields.io/codecov/c/github/mike-huls/cachr&#41;                                                                                                                                                                                                                                                                                          |)
+
+[//]: # (| Package | [![PyPI Latest Release]&#40;https://img.shields.io/pypi/v/cachr.svg&#41;]&#40;https://pypi.org/project/cachr/&#41; [![PyPI Downloads]&#40;https://img.shields.io/pypi/dm/cachr.svg?label=PyPI%20downloads&#41;]&#40;https://pypistats.org/packages/cachr&#41; <br/>![status]&#40;https://img.shields.io/pypi/status/cachr&#41; ![dependencies]&#40;https://img.shields.io/librariesio/release/pypi/cachr&#41; |)
+
+[//]: # (| Meta    | ![GitHub License]&#40;https://img.shields.io/github/license/mike-huls/cachr&#41; ![implementation]&#40;https://img.shields.io/pypi/implementation/cachr&#41;  ![versions]&#40;https://img.shields.io/pypi/pyversions/cachr&#41;                                                                                                                                                       |)
+
+[//]: # (| Social  | ![tweet]&#40;https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fmike-huls%2Fcachr&#41; ![xfollow]&#40;https://img.shields.io/twitter/follow/mike_huls?style=social&#41;                                                                                                                                                                           | )
 
 **cachr** is a Python package that provides superfast, composable caches designed to 
 optimize your applications in an easy and intuitive way.

@@ -1,4 +1,4 @@
-[project]
+[tool.poetry]
 name = "cachr"
 version = "0.0.8"
 description = "Library that allows you to compose your own cache, pre-packaged with many useful caches"
@@ -30,16 +30,25 @@ include = [
     "LICENSE",
 ]
 
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.7.2"
+coverage = "^7.6.4"
+pytest = "^8.3.3"
+
 [project.urls]
 "Homepage" = "https://github.com/mike-huls/cachr"
 "Bug Tracker" = "https://github.com/mike-huls/cachr/issues"
 "Documentation" = "https://github.com/mike-huls/cachr/blob/master/README.md/"
-"Changelog" = "https://github.com/mike-huls/cachr/blob/master/CHANGELOG.md/"
 "Source" = "https://github.com/mike-huls/cachr/"
 "Say Thanks!" = "https://www.buymeacoffee.com/mikehuls"
 
-[dependency-groups]
-dev = [
-    "coverage>=7.6.4",
-    "pytest>=8.3.3",
-]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+# Optional: if you want to build a source distribution as well
+sdist = true

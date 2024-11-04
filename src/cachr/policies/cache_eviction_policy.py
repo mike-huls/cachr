@@ -5,7 +5,7 @@ from .cache_strategy import CacheStrategy
 
 class DefaultEvictionPolicy(CacheStrategy):
     def on_access(self, cache: "Cache", key: Any) -> None:
-        """ Method that is called before a key is accessed in the cache."""
+        """Method that is called before a key is accessed in the cache."""
         # Does nothing; key order is maintained
 
     def on_insert(self, cache: "Cache", key: Any) -> None:
@@ -14,5 +14,5 @@ class DefaultEvictionPolicy(CacheStrategy):
             self.evict(cache=cache)
 
     def evict(self, cache: "Cache") -> None:
-        """ Remove the oldes ."""
+        """Remove the oldes ."""
         cache.cache.popitem(last=False)

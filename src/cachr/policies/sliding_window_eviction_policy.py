@@ -7,7 +7,9 @@ from .cache_strategy import CacheStrategy
 
 class SlidingWindowEvictionPolicy(CacheStrategy):
     def __init__(self, expiration_seconds: float):
-        self.expiration_seconds = expiration_seconds  # Sliding window duration in seconds
+        self.expiration_seconds = (
+            expiration_seconds  # Sliding window duration in seconds
+        )
         self.timestamps: OrderedDict[Any, float] = OrderedDict()
 
     def _is_expired(self, key: Any) -> bool:
@@ -34,8 +36,11 @@ class SlidingWindowEvictionPolicy(CacheStrategy):
     def evict(self, cache: "Cache") -> None:
         """Evict items that fall outside the sliding window."""
         current_time = time.time()
-        keys_to_evict = [key for key, timestamp in self.timestamps.items()
-                         if (current_time - timestamp) > self.expiration_seconds]
+        keys_to_evict = [
+            key
+            for key, timestamp in self.timestamps.items()
+            if (current_time - timestamp) > self.expiration_seconds
+        ]
         for key in keys_to_evict:
             cache.cache.pop(key, None)
             self.timestamps.pop(key, None)

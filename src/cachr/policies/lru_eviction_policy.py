@@ -9,7 +9,7 @@ class LRUEvictionPolicy(CacheStrategy):
         cache.cache.move_to_end(key=key)
 
     def on_insert(self, cache: "Cache", key: Any) -> None:
-        """ Before item is inserted; check if we need to evict Least Recently Used item """
+        """Before item is inserted; check if we need to evict Least Recently Used item"""
         if len(cache.cache) >= cache.capacity:
             self.evict(cache=cache)
 

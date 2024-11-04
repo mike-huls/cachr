@@ -6,10 +6,10 @@ from .cache_strategy import CacheStrategy
 
 class RandomEvictionPolicy(CacheStrategy):
     def on_access(self, cache: "Cache", key: Any) -> Any:
-        """ Do Nothing """
+        """Do Nothing"""
 
     def on_insert(self, cache: "Cache", key: Any) -> None:
-        """ Before item is inserted; check if we need to evict one """
+        """Before item is inserted; check if we need to evict one"""
         if len(cache.cache) >= cache.capacity:
             self.evict(cache=cache)
 

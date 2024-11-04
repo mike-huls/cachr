@@ -16,7 +16,7 @@ class LFUEvictionPolicy(CacheStrategy):
     #     return (time.time() - self.key_access_count_dict[key]) > self.ttl
 
     def on_access(self, cache: "Cache", key: Any) -> None:
-        """ Move key to the end and update frequency dict if item is accessed """
+        """Move key to the end and update frequency dict if item is accessed"""
         self.frequency_dict[key] += 1
         cache.cache.move_to_end(key=key)
 
@@ -32,8 +32,8 @@ class LFUEvictionPolicy(CacheStrategy):
         """Evict items based on expiration and capacity."""
 
         # Initialize variables to track the least frequent and oldest key
-        least_frequency = float('inf')
-        oldest_timestamp = float('inf')
+        least_frequency = float("inf")
+        oldest_timestamp = float("inf")
         selected_key = None
 
         for key in self.frequency_dict:
@@ -41,7 +41,9 @@ class LFUEvictionPolicy(CacheStrategy):
             timestamp = self.timestamps[key]
 
             # Compare based on frequency first, then timestamp if necessary
-            if frequency < least_frequency or (frequency == least_frequency and timestamp < oldest_timestamp):
+            if frequency < least_frequency or (
+                frequency == least_frequency and timestamp < oldest_timestamp
+            ):
                 least_frequency = frequency
                 oldest_timestamp = timestamp
                 selected_key = key
