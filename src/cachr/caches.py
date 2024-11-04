@@ -85,6 +85,9 @@ class Cache:
         """Calls the evict method to refresh the cache; rid it of all expired or exess keys"""
         self._cache_strategy.evict(cache=self)
 
+    # def __reset_cache_info(self) -> None:
+    #     self._cache_info.reset()
+
     # region DECORATOR
     def __call__(self, func: Callable) -> Callable:
         def wrapper(*args, **kwargs):
@@ -103,6 +106,8 @@ class Cache:
         # Add convenience methods on the cache
         wrapper.cache_info = self.__get_cache_info
         wrapper.clear = self.clear
+        wrapper.cache = self.cache
+        # wrapper.reset = self.__reset_cache_info
         wrapper.refresh = self.__refresh_cache
 
         return wrapper
@@ -127,9 +132,7 @@ class SlidingWindowCache(Cache):
     def __init__(self, capacity: int, expiration_seconds: float):
         super().__init__(
             capacity=capacity,
-            cache_strategy=policies.SlidingWindowEvictionPolicy(
-                expiration_seconds=expiration_seconds
-            ),
+            cache_strategy=policies.SlidingWindowEvictionPolicy(expiration_seconds=expiration_seconds),
         )
 
 
@@ -146,6 +149,4 @@ class RandomReplaceCache(Cache):
         self,
         capacity: int,
     ):
-        super().__init__(
-            capacity=capacity, cache_strategy=policies.RandomEvictionPolicy()
-        )
+        super().__init__(capacity=capacity, cache_strategy=policies.RandomEvictionPolicy())

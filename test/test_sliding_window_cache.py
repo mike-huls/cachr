@@ -1,3 +1,4 @@
+import datetime
 import unittest
 import time
 
@@ -24,7 +25,7 @@ class TestSlidingWindowEvictionPolicy(unittest.TestCase):
             msg="Key 'a' should still be available as it was accessed within the window",
         )
 
-    def test_sliding_window_expiration(self):
+    def test_sliding_window_no_expiration_evict(self):
         # Create a sliding window cache with a 0.5-second window size
         sliding_cache = SlidingWindowCache(capacity=3, expiration_seconds=0.2)
         sliding_cache.put("a", 1)
@@ -39,8 +40,29 @@ class TestSlidingWindowEvictionPolicy(unittest.TestCase):
         )
         time.sleep(0.1)
 
+        self.assertIsNone(obj=sliding_cache.get("a"), msg="Key 'a' should have been expired by now")
+
+    def test_sliding_window_expiration(self):
+        # Create a sliding window cache with a 0.5-second window size
+        sliding_cache = SlidingWindowCache(capacity=3, expiration_seconds=0.1)
+        sliding_cache.put("a", 1)
+        curr_timestamp = sliding_cache._cache_strategy.timestamps["a"]
+
+        # Retrieving within expiration window updates time stamp
+        time.sleep(0.05)
+        sliding_cache.get(key="a")
+        self.assertNotEqual(
+            first=curr_timestamp,
+            second=sliding_cache._cache_strategy.timestamps["a"],
+            msg="timestamp should have been updated",
+        )
+        curr_timestamp = sliding_cache._cache_strategy.timestamps["a"]
+
+        # Retrieve outsite expiration window will evict the item on access
+        time.sleep(0.15)
         self.assertIsNone(
-            obj=sliding_cache.get("a"), msg="Key 'a' should have been expired by now"
+            obj=sliding_cache.get(key="a"),
+            msg="A is requested outside expiration window; should have been evicted",
         )
 
     def test_sliding_window_refresh_on_access(self):
@@ -65,20 +87,14 @@ class TestSlidingWindowEvictionPolicy(unittest.TestCase):
         sliding_cache.put("a", 1)
         sliding_cache.put("b", 2)
         time.sleep(0.3)
-        sliding_cache.put(
-            "c", 3
-        )  # This should evict "a" as it is the least recently used within the window
+        sliding_cache.put("c", 3)  # This should evict "a" as it is the least recently used within the window
 
         self.assertIsNone(
             sliding_cache.get("a"),
             msg="Key 'a' should have been evicted as it was least recently used",
         )
-        self.assertEqual(
-            sliding_cache.get("b"), 2, msg="Key 'b' should still be available"
-        )
-        self.assertEqual(
-            sliding_cache.get("c"), 3, msg="Failed to retrieve value '3' for key 'c'"
-        )
+        self.assertEqual(sliding_cache.get("b"), 2, msg="Key 'b' should still be available")
+        self.assertEqual(sliding_cache.get("c"), 3, msg="Failed to retrieve value '3' for key 'c'")
 
     def test_sliding_window_mixed_operations(self):
         # Create a sliding window cache with a 0.4-second window size
@@ -89,32 +105,22 @@ class TestSlidingWindowEvictionPolicy(unittest.TestCase):
         sliding_cache.put("b", 2)
         sliding_cache.put("c", 3)
 
-        self.assertEqual(
-            sliding_cache.cache.get("a"), 1, msg="Key 'a' should still be available"
-        )
+        self.assertEqual(sliding_cache.cache.get("a"), 1, msg="Key 'a' should still be available")
 
         time.sleep(0.3)
-        self.assertIsNone(
-            sliding_cache.get("a"), msg="Key 'a' should have expired after 0.4 seconds"
-        )
-        self.assertEqual(
-            sliding_cache.get("b"), 2, msg="Key 'b' should still be available"
-        )
+        self.assertIsNone(obj=sliding_cache.get("a"), msg="Key 'a' should have expired after 0.4 seconds")
+        self.assertEqual(first=sliding_cache.get("b"), second=2, msg="Key 'b' should still be available")
 
-        sliding_cache.put("d", 4)
-        sliding_cache.put(
-            "e", 4
-        )  # This should evict "c" as it is the least recently used within the window
-        self.assertIsNone(
-            sliding_cache.get("c"), msg="Key 'c' should have been evicted"
+        sliding_cache.put(key="d", value=4)
+        # This should evict "c" as it is the least recently used within the window
+        sliding_cache.put(key="e", value=4)
+
+        self.assertIsNone(sliding_cache.get("c"), msg="Key 'c' should have been evicted")
+        self.assertEqual(
+            first=sliding_cache.get("b"), second=2, msg="Key 'b' should still be available after adding 'd'"
         )
         self.assertEqual(
-            sliding_cache.get("b"),
-            2,
-            msg="Key 'b' should still be available after adding 'd'",
-        )
-        self.assertEqual(
-            sliding_cache.get("d"), 4, msg="Failed to retrieve value '4' for key 'd'"
+            first=sliding_cache.get("d"), second=4, msg="Failed to retrieve value '4' for key 'd'"
         )
 
 

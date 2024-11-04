@@ -22,6 +22,7 @@ class LFUEvictionPolicy(CacheStrategy):
 
     def on_insert(self, cache: "Cache", key: Any) -> None:
         """Insert an item into the cache, evicting if necessary."""
+        print(f"\n Inserting {key=}")
         if len(cache.cache) >= cache.capacity:
             self.evict(cache=cache)
             # cache.cache.popitem(last=False)
@@ -36,19 +37,25 @@ class LFUEvictionPolicy(CacheStrategy):
         oldest_timestamp = float("inf")
         selected_key = None
 
+        print(cache.cache)
         for key in self.frequency_dict:
             frequency = self.frequency_dict[key]
             timestamp = self.timestamps[key]
 
             # Compare based on frequency first, then timestamp if necessary
-            if frequency < least_frequency or (
-                frequency == least_frequency and timestamp < oldest_timestamp
-            ):
+            if frequency < least_frequency or (frequency == least_frequency and timestamp < oldest_timestamp):
                 least_frequency = frequency
                 oldest_timestamp = timestamp
                 selected_key = key
         cache.cache.pop(selected_key)
+        self.timestamps.pop(selected_key)
+        self.frequency_dict.pop(selected_key)
 
-        # If the cache is still at capacity: remove the least recently used
-        if len(cache.cache) >= cache.capacity:
-            cache.cache.popitem(last=False)
+
+        # print(f"still here - {len(cache.cache)}, {cache.capacity}")
+        # print(cache.cache)
+        # # If the cache is still at capacity: remove the least recently used (same freq, same timestamp)
+        # if len(cache.cache) > cache.capacity:
+        #     print("overflow", len(cache.cache))
+        #     cache.cache.popitem(last=False)
+        #     print("end", len(cache.cache))

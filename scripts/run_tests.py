@@ -6,9 +6,7 @@ from pathlib import Path
 
 # Run the tests with coverage
 print("Running tests...")
-subprocess.run(
-    ["coverage", "run", "-m", "unittest", "discover", "test", "--quiet"], check=True
-)
+subprocess.run(["coverage", "run", "-m", "unittest", "discover", "test", "--quiet"], check=True)
 
 # Generate the HTML coverage report and html
 print("generating report..")
