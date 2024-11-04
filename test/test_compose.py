@@ -28,7 +28,9 @@ class TestCompose(unittest.TestCase):
         cache.put(key=3, value="three")
         print(cache.size)
         self.assertEqual(first=2, second=cache.size, msg="Cache should be of size == 2")
-        self.assertEqual(first="two", second=cache.cache.get(2), msg="'two' should be in cache")
+        self.assertEqual(
+            first="two", second=cache.cache.get(2), msg="'two' should be in cache"
+        )
         self.assertEqual(
             first="three",
             second=cache.cache.get(3),

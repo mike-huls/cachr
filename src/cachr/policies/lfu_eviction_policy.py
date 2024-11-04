@@ -43,14 +43,15 @@ class LFUEvictionPolicy(CacheStrategy):
             timestamp = self.timestamps[key]
 
             # Compare based on frequency first, then timestamp if necessary
-            if frequency < least_frequency or (frequency == least_frequency and timestamp < oldest_timestamp):
+            if frequency < least_frequency or (
+                frequency == least_frequency and timestamp < oldest_timestamp
+            ):
                 least_frequency = frequency
                 oldest_timestamp = timestamp
                 selected_key = key
         cache.cache.pop(selected_key)
         self.timestamps.pop(selected_key)
         self.frequency_dict.pop(selected_key)
-
 
         # print(f"still here - {len(cache.cache)}, {cache.capacity}")
         # print(cache.cache)

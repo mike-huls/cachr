@@ -132,7 +132,9 @@ class SlidingWindowCache(Cache):
     def __init__(self, capacity: int, expiration_seconds: float):
         super().__init__(
             capacity=capacity,
-            cache_strategy=policies.SlidingWindowEvictionPolicy(expiration_seconds=expiration_seconds),
+            cache_strategy=policies.SlidingWindowEvictionPolicy(
+                expiration_seconds=expiration_seconds
+            ),
         )
 
 
@@ -149,4 +151,6 @@ class RandomReplaceCache(Cache):
         self,
         capacity: int,
     ):
-        super().__init__(capacity=capacity, cache_strategy=policies.RandomEvictionPolicy())
+        super().__init__(
+            capacity=capacity, cache_strategy=policies.RandomEvictionPolicy()
+        )

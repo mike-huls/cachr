@@ -7,7 +7,9 @@ from .cache_strategy import CacheStrategy
 
 class SlidingWindowEvictionPolicy(CacheStrategy):
     def __init__(self, expiration_seconds: float):
-        self.expiration_seconds = expiration_seconds  # Sliding window duration in seconds
+        self.expiration_seconds = (
+            expiration_seconds  # Sliding window duration in seconds
+        )
         self.timestamps: OrderedDict[Any, float] = OrderedDict()
 
     def _is_expired(self, key: Any) -> bool:
