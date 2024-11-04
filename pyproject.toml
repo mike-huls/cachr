@@ -1,10 +1,15 @@
 [project]
 name = "cachr"
 version = "0.0.9"
-description = "Library that allows you to compose your own cache, pre-packaged with many useful caches"
-authors = ["Mike Huls <mikehuls42@gmail.com>"]
-license = "MIT"
+description = "Easy caching in Python. Cachr allows you to compose your own cache and comes pre-packaged with many useful caches"
+authors = [{ name = "Mike Huls", email = "mikehuls42@gmail.com" }]
+license = { file = "LICENSE" }
 readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
+keywords = [
+  "caching", "cache"
+]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
@@ -26,9 +31,6 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: CPython",
     "License :: OSI Approved :: MIT License",
 ]
-include = [
-    "LICENSE",
-]
 
 [project.urls]
 "Homepage" = "https://github.com/mike-huls/cachr"
@@ -38,13 +40,12 @@ include = [
 "Source" = "https://github.com/mike-huls/cachr/"
 "Say Thanks!" = "https://www.buymeacoffee.com/mikehuls"
 
-[dependency-groups]
-dev = [
-    "coverage>=7.6.4",
-    "pytest>=8.3.3",
-]
-
 [tool.uv]
 dev-dependencies = [
+    "coverage>=7.6.4",
+    "pytest>=8.3.3",
     "ruff>=0.7.2",
 ]
+
+[tool.setuptools]
+license-files = ["LICENSE"]
