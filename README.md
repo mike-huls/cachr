@@ -7,14 +7,16 @@
  ╚═════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝  
 ```
 
-![coverage](https://img.shields.io/codecov/c/github/mike-huls/cachr)
-![Tests](https://github.com/mike-huls/cachr/actions/workflows/tests.yml/badge.svg)
-![version](https://img.shields.io/pypi/v/cachr?color=%2334D058&label=pypi%20package)
-![dependencies](https://img.shields.io/librariesio/release/pypi/cachr)
-![PyPI Downloads](https://img.shields.io/pypi/dm/cachr.svg?label=PyPI%20downloads)
-![versions](https://img.shields.io/pypi/pyversions/cachr.svg?color=%2334D058)
+[![coverage](https://img.shields.io/codecov/c/github/mike-huls/cachr)](https://codecov.io/gh/mike-huls/cachr)
+[![Tests](https://github.com/mike-huls/cachr/actions/workflows/tests.yml/badge.svg)](https://github.com/mike-huls/cachr/actions/workflows/tests.yml)
+[![version](https://img.shields.io/pypi/v/cachr?color=%2334D058&label=pypi%20package)](https://pypi.org/project/cachr)
+[![dependencies](https://img.shields.io/librariesio/release/pypi/cachr)](https://pypi.org/project/cachr)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/cachr.svg?label=PyPI%20downloads)](https://pypistats.org/packages/cachr)
+[![versions](https://img.shields.io/pypi/pyversions/cachr.svg?color=%2334D058)](https://pypi.org/project/cachr)
 <br>
-![tweet](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fmike-huls%2Fcachr) ![xfollow](https://img.shields.io/twitter/follow/mike_huls?style=social)
+[![tweet](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fmike-huls%2Fcachr)](https://twitter.com/intent/tweet?text=Check%20this%20out:&url=https%3A%2F%2Fgithub.com%2Fmike-huls%2Fcachr) 
+[![xfollow](https://img.shields.io/twitter/follow/mike_huls)](https://twitter.com/intent/follow?screen_name=mike_huls)
+
 # cachr: superfast, composable caching for Python
 
 [//]: # (|         |                                                                                                                                                                                                                                                                                                                                                               |)
